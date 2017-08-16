@@ -14,13 +14,15 @@ import com.example.demo.util.mapper.BeanMapper;
 @RequestMapping("/")
 public class HomeController {
 	
+	public static final String HOME_RESULT = "Home";
+	
 	@Autowired
 	ConfigInfo configInfo;
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
     @ResponseBody
     public String home() {
-        return "Home";
+        return HOME_RESULT;
     }
 	
 	@RequestMapping(value="/getConfigInfo", method=RequestMethod.GET)
