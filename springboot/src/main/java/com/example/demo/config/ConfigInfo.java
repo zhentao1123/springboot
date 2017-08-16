@@ -14,4 +14,10 @@ public class ConfigInfo {
 	
 	@Value("${server.port}")
 	private String serverPort;
+	
+	@Value("${mytest.test2}")
+	private Integer testInt;
+	
+	@Value("${mytest.value}")
+	private String testString;
 }
