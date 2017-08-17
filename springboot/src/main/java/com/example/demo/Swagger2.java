@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import org.springframework.context.annotation.Configuration;
 
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -21,8 +24,10 @@ public class Swagger2 {
 		return new Docket(DocumentationType.SWAGGER_2)
 			.apiInfo(apiInfo())
 			.select()
-			.apis(RequestHandlerSelectors.basePackage(basePackage))
-			.paths(PathSelectors.any())
+			//.apis(RequestHandlerSelectors.basePackage(basePackage))//匹配包
+			.apis(RequestHandlerSelectors.withClassAnnotation(Api.class))//匹配类注解
+			.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))//匹配方法注解
+			//.paths(PathSelectors.any())
 			.build();
 	}
 	
