@@ -4,6 +4,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.context.request.async.DeferredResult;
+
+import com.google.common.base.Predicates;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -22,13 +25,19 @@ public class Swagger2 {
 	
 	public Docket createRestApi(){
 		return new Docket(DocumentationType.SWAGGER_2)
-			.apiInfo(apiInfo())
+			.groupName("v1")
+			.genericModelSubstitutes(DeferredResult.class)
+            .useDefaultResponseMessages(false)
+            .forCodeGeneration(true)
+            .pathMapping("/")
 			.select()
 			//.apis(RequestHandlerSelectors.basePackage(basePackage))//匹配包
-			.apis(RequestHandlerSelectors.withClassAnnotation(Api.class))//匹配类注解
-			.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))//匹配方法注解
+			//.apis(RequestHandlerSelectors.withClassAnnotation(Api.class))//匹配类注解
+			//.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))//匹配方法注解
 			//.paths(PathSelectors.any())
-			.build();
+			//.paths(Predicates.or(PathSelectors.regex("/users/.*")))//过滤的接口
+			.build()
+			.apiInfo(apiInfo());
 	}
 	
 	private ApiInfo apiInfo() {
