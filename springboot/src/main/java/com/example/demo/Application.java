@@ -11,7 +11,8 @@ import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfi
 
 @SpringBootApplication
 //@EnableWebMvc//开启springmvc
-//@Import({Swagger2Config.class, DataSourceConfig.class})
+//@Import({Swagger2Config.class, DataSourceConfig.class})//导入配置类;可显示声明，也可以通过保证放在扫描包目录
+//@ImportResource(locations={"classpath:application.xml"})//导入配置xml
 public class Application {
 
 	public static void main(String[] args) {
