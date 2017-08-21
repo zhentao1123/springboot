@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" 
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/jdbc 
+		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd">
+    
+    <!-- Spring Boot 项目 application-*.properties的命名及application.properties中的spring.profiles.active属性指定似乎会影响到xml配置方式，此处无需再声明profile -->
+    <bean name="configInfo1" class="com.example.demo.config.ConfigInfo1">
+		<property name="profile" value="${profile}"/>
+		<property name="serverPort" value="${server.port}"/>
+		<property name="testInt" value="${mytest.test1}"/>
+		<property name="testString" value="${mytest.value}"/>
+	</bean>
+    
+	<!-- Production环境
+	<beans profile="prod">
+		<context:property-placeholder ignore-resource-not-found="true" location="classpath*:/application.properties, classpath*:/application-prod.properties" />
+		<bean name="configInfo1" class="com.example.demo.config.ConfigInfo1">
+			<property name="profile" value="${profile}"/>
+			<property name="serverPort" value="${server.port}"/>
+			<property name="testInt" value="${mytest.test1}"/>
+			<property name="testString" value="${mytest.value}"/>
+		</bean>
+	</beans>
+	 -->
+	<!-- Development环境
+	<beans profile="dev">
+		<context:property-placeholder ignore-resource-not-found="true" location="classpath*:/application.properties, classpath*:/application-dev.properties" />
+		<bean name="configInfo1" class="com.example.demo.config.ConfigInfo1">
+			<property name="profile" value="${profile}"/>
+			<property name="serverPort" value="${server.port}"/>
+			<property name="testInt" value="${mytest.test1}"/>
+			<property name="testString" value="${mytest.value}"/>
+		</bean>
+	</beans>
+	 -->
+</beans>
