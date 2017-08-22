@@ -21,8 +21,8 @@ public class SpringbootApplicationTests {
 	
 	@Test
 	public void contextLoads() {
-		log.debug(configInfo.toString());
-		System.out.println(configInfo.toString());
+		log.info(configInfo.toString());
+		//System.out.println(configInfo.toString());
 	}
 
 }
