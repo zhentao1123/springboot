@@ -10,7 +10,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
-
+/**
+ * TODO need to add config of connection pool
+ * @author zhangzhentao
+ *
+ */
 @Configuration
 public class DataSourceConfig {
 
