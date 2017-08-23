@@ -1,7 +1,7 @@
 package com.example.demo.domain;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -15,4 +15,7 @@ public class User {
 	
 	//@ApiModelProperty(name="年龄")
     private Integer age;
+    
+    //@ApiModelProperty(name="生日")
+    private Date birthday;
 }
