@@ -32,7 +32,7 @@ public class Swagger2Config {
 			.select()
 			//.apis(RequestHandlerSelectors.basePackage(basePackage))//匹配包
 			//.apis(RequestHandlerSelectors.withClassAnnotation(Api.class))//匹配类注解
-			//.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))//匹配方法注解
+			.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))//匹配方法注解
 			//.paths(PathSelectors.any())
 			//.paths(Predicates.or(PathSelectors.regex("/users/.*")))//过滤的接口
 			.build()

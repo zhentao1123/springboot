@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dao.UserDao;
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	@Transactional
+	@Transactional(rollbackFor=Exception.class)//默认只有捕捉到RunTimeException才会回滚
 	public void addUser(User user) throws MyException{
 		try {
 			userDao.createUser(user);
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	@Transactional
+	@Transactional(rollbackFor=Exception.class)
 	public void editUser(Long id, User user) throws MyException{
 		try {
 			userDao.updateUser(id, user);
@@ -56,10 +57,12 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	@Transactional
+	@Transactional(isolation=Isolation.READ_COMMITTED)
 	public void removeUser(Long id) throws MyException{
 		try {
+			//TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			userDao.deleteUser(id);
+			throw new Exception();
 		} catch (Exception e) {
 			throw new MyException(e.getMessage());
 		}

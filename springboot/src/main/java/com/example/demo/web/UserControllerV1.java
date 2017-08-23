@@ -13,7 +13,8 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.hibernate.validator.internal.util.privilegedactions.GetClassLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.User;
+import com.example.demo.exception.MyException;
+import com.example.demo.service.UserService;
 
 /**
  * REST Demo
@@ -28,24 +31,29 @@ import com.example.demo.domain.User;
  *
  */
 @RestController
-@RequestMapping("/users")
-@Api(hidden=false)
-public class UserController {
+@RequestMapping("/v1/users")
+@Api(hidden=false, tags="User接口")
+public class UserControllerV1 {
+	
+	static final Log log = LogFactory.getLog(UserControllerV1.class);
+	static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
 	
 	public static final String SUCCESS = "success";
-	
-	static final Log log = LogFactory.getLog(UserController.class);
-	static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
 
+	//@Autowired
+	//UserService userService;
+	
 	/**
 	 * 处理"/users/"的GET请求，用来获取用户列表
 	 * 还可以通过@RequestParam从页面中传递参数来进行查询条件或者翻页信息的传递
 	 * @return
+	 * @throws MyException 
 	 */
 	@ApiOperation(value="获取用户列表", notes="")
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public List<User> getUserList(){
+	public List<User> getUserList() throws MyException{
 		List<User> l = new ArrayList<User>(users.values());
+		//List<User> l = userService.getUserList();
 		return l;
 	}
 	
@@ -58,8 +66,9 @@ public class UserController {
 	@ApiOperation(value="创建用户", notes="根据User对象创建用户")
     @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
 	@RequestMapping(value="/", method=RequestMethod.POST)
-	public String postUser(@RequestBody User user){
+	public String postUser(@RequestBody User user) throws MyException{
 		users.put(user.getId(), user);
+		//userService.addUser(user);
 		log.warn(users.toString());
 		return SUCCESS;
 	}
@@ -73,8 +82,9 @@ public class UserController {
 	@ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public User getUser(@PathVariable Long id){
+	public User getUser(@PathVariable Long id) throws MyException{
 		return users.get(id);
+		//return userService.getUser(id);
 	}
 	
 	/**
@@ -89,24 +99,33 @@ public class UserController {
             @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
     })
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public String putUser(@PathVariable Long id, @RequestBody User user){
+	public String putUser(@PathVariable Long id, @RequestBody User user) throws MyException{
 		User u = users.get(id);
 		u.setAge(user.getAge());
 		u.setName(user.getName());
 		users.put(id, u);
 		return SUCCESS;
+		
+		//User u = userService.getUser(id);
+		//u.setAge(user.getAge());
+		//u.setName(user.getName());
+		//u.setBirthday(user.getBirthday());
+		//userService.editUser(id, user);
+		//return SUCCESS;
 	}
 	
 	/**
 	 * 处理"/users/{id}"的DELETE请求，用来删除User
 	 * @param id
 	 * @return
+	 * @throws MyException 
 	 */
 	@ApiOperation(value="删除用户", notes="根据url的id来指定删除对象")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public String deleteUser(@PathVariable Long id) {
+	public String deleteUser(@PathVariable Long id) throws MyException {
 		users.remove(id);
+		//userService.removeUser(id);
 		return SUCCESS;
 	}
 }
