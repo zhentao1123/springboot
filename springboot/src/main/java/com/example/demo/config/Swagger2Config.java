@@ -31,7 +31,7 @@ public class Swagger2Config {
             //.pathMapping("/")
 			.select()
 			//.apis(RequestHandlerSelectors.basePackage(basePackage))//匹配包
-			//.apis(RequestHandlerSelectors.withClassAnnotation(Api.class))//匹配类注解
+			//.apis(RequestHandlerSelectors.withClassAnnotßation(Api.class))//匹配类注解
 			.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))//匹配方法注解
 			//.paths(PathSelectors.any())
 			//.paths(Predicates.or(PathSelectors.regex("/users/.*")))//过滤的接口
@@ -41,11 +41,11 @@ public class Swagger2Config {
 	
 	private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Spring Boot Demo")
-                .description("Spring Boot Demo")
-                .termsOfServiceUrl("http://www.spring.com/")
-                .contact(new Contact("bobz",null,null))
-                .version("1.0")
+                .title("API标题位")
+                .description("API描述位")
+                .termsOfServiceUrl("服务URL的规范描述")
+                .contact(new Contact("接口联系人",null,null))
+                //.version("1.0")
                 .build();
     }
 }
