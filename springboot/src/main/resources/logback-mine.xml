@@ -46,9 +46,9 @@
     </appender>
     
     <!-- 包目录定义日志级别 -->
-    <logger name="org.springframework" level="OFF"/>
-    <logger name="org.hibernate" level="OFF"/>
-    <logger name="springfox" level="OFF"/>
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="springfox" level="ERROR"/>
 	
     <logger name="com.example.demo" level="INFO">
     	<appender-ref ref="ASYNC_FILE"/>

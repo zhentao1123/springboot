@@ -30,9 +30,9 @@ import com.example.demo.service.UserService;
  *
  */
 @RestController
-@RequestMapping("/v2/users")
+@RequestMapping("/v3/users")
 @Api(hidden=false, tags="User接口")
-public class UserControllerV2 {
+public class UserControllerV3 {
 	
 	static final Log log = LogFactory.getLog(UserControllerV2.class);
 	static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
