@@ -15,7 +15,7 @@ import javax.sql.DataSource;
  * @author zhangzhentao
  *
  */
-@Configuration
+//@Configuration
 public class DataSourceConfig {
 
     @Bean(name = "primaryDataSource")

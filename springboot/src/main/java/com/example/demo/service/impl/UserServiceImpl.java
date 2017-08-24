@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	@Transactional(rollbackFor=Exception.class)//默认只有捕捉到RunTimeException才会回滚
+	@Transactional(rollbackFor=Exception.class, isolation=Isolation.READ_COMMITTED)//默认只有捕捉到RunTimeException才会回滚
 	public void addUser(User user) throws MyException{
 		try {
 			userDao.createUser(user);
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	@Transactional(rollbackFor=Exception.class)
+	@Transactional(rollbackFor=Exception.class, isolation=Isolation.READ_COMMITTED)
 	public void editUser(Long id, User user) throws MyException{
 		try {
 			userDao.updateUser(id, user);
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	@Transactional(isolation=Isolation.READ_COMMITTED)
+	@Transactional(rollbackFor=Exception.class, isolation=Isolation.READ_COMMITTED)
 	public void removeUser(Long id) throws MyException{
 		try {
 			//TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

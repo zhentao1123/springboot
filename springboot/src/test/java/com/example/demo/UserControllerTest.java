@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.example.demo.web.HomeController;
-import com.example.demo.web.UserController;
+import com.example.demo.web.UserControllerV1;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -41,7 +41,7 @@ public class UserControllerTest {
 	public void setUp() throws Exception{
 		mvc = MockMvcBuilders.standaloneSetup(
 				new HomeController(), 
-				new UserController()).build();
+				new UserControllerV1()).build();
 	}
 	
 	//@Test
@@ -71,7 +71,7 @@ public class UserControllerTest {
 		mvc.perform(request)
 			//.andDo(MockMvcResultHandlers.print())
 			//.andExpect(status().isOk())
-			.andExpect(content().string(equalTo(UserController.SUCCESS)));
+			.andExpect(content().string(equalTo(UserControllerV1.SUCCESS)));
 		
 		// 3、get获取user列表，应该有刚才插入的数据
 		request = get("/users/");
@@ -88,7 +88,7 @@ public class UserControllerTest {
 				.param("age", "30");
 		mvc.perform(request)
 			//.andExpect(status().isOk())
-			.andExpect(content().string(equalTo(UserController.SUCCESS)));
+			.andExpect(content().string(equalTo(UserControllerV1.SUCCESS)));
 		
 		// 5、get一个id为1的user
 		request = get("/users/1");
@@ -103,7 +103,7 @@ public class UserControllerTest {
 		// 6、del删除id为1的user
 		request = delete("/users/1");
 		mvc.perform(request)
-			.andExpect(content().string(equalTo(UserController.SUCCESS)));
+			.andExpect(content().string(equalTo(UserControllerV1.SUCCESS)));
 
 		// 7、get查一下user列表，应该为空
 		request = get("/users/");
