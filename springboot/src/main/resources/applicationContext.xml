@@ -35,11 +35,11 @@
     </bean>
     
     <!-- DataSource druid , primary="true" is neccory -->
-	<bean id="primaryDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close" primary="true"> 
+	<bean id="primaryDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close" primary="true">
+		 <property name="name" value="primaryDataSource" />
 	     <property name="url" value="${spring.datasource.primary.url}" />
 	     <property name="username" value="${spring.datasource.primary.username}" />
 	     <property name="password" value="${spring.datasource.primary.password}" />
-	     <property name="filters" value="stat" />
 	     <property name="maxActive" value="20" />
 	     <property name="initialSize" value="1" />
 	     <property name="maxWait" value="60000" />
@@ -49,10 +49,11 @@
 	     <property name="testWhileIdle" value="true" />
 	     <property name="testOnBorrow" value="false" />
 	     <property name="testOnReturn" value="false" />
-	     <property name="poolPreparedStatements" value="true" />
+	     <property name="poolPreparedStatements" value="false" />
 	     <property name="maxOpenPreparedStatements" value="20" />
+	     <property name="defaultAutoCommit" value="false" />
+	     <property name="filters" value="stat,log4j,wall" />
 	      <!-- simple config 4 StatFilter 
-	     <property name="filters" value="stat" />
 	     <property name="filters" value="mergeStat" /> 
 	     -->
 	     <property name="proxyFilters">
@@ -64,10 +65,10 @@
 	     <property name="useGlobalDataSourceStat" value="true" />
 	 </bean>
 	 <bean id="secondaryDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"> 
+	 	 <property name="name" value="secondaryDataSource" />
 	     <property name="url" value="${spring.datasource.secondary.url}" />
 	     <property name="username" value="${spring.datasource.secondary.username}" />
 	     <property name="password" value="${spring.datasource.secondary.password}" />
-	     <property name="filters" value="stat" />
 	     <property name="maxActive" value="20" />
 	     <property name="initialSize" value="1" />
 	     <property name="maxWait" value="60000" />
@@ -77,8 +78,10 @@
 	     <property name="testWhileIdle" value="true" />
 	     <property name="testOnBorrow" value="false" />
 	     <property name="testOnReturn" value="false" />
-	     <property name="poolPreparedStatements" value="true" />
+	     <property name="poolPreparedStatements" value="false" />
 	     <property name="maxOpenPreparedStatements" value="20" />
+	     <property name="defaultAutoCommit" value="false" />
+	     <property name="filters" value="stat,log4j,wall" />
 	     <property name="proxyFilters">
 			<list>
 				<ref bean="stat-filter" />
