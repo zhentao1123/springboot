@@ -41,7 +41,7 @@ public class GlobalExceptionHandler {
         ErrorInfo<String> r = new ErrorInfo<>();
         r.setMessage(e.getMessage());
         r.setCode(ErrorInfo.ERROR);
-        r.setData("Some Data");
+        r.setData("");
         r.setUrl(req.getRequestURL().toString());
         return r;
     }

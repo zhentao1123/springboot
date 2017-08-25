@@ -1,6 +1,13 @@
 package com.example.demo.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.alibaba.fastjson.annotation.JSONField;
 
 import lombok.Data;
 
@@ -17,5 +24,6 @@ public class User {
     private Integer age;
     
     //@ApiModelProperty(name="生日")
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date birthday;
 }
