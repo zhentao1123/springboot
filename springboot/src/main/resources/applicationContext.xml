@@ -49,7 +49,7 @@
 	     <property name="testWhileIdle" value="true" />
 	     <property name="testOnBorrow" value="false" />
 	     <property name="testOnReturn" value="false" />
-	     <property name="poolPreparedStatements" value="false" />
+	     <property name="poolPreparedStatements" value="false" /><!-- suggest to set false in mysql -->
 	     <property name="maxOpenPreparedStatements" value="20" />
 	     <property name="defaultAutoCommit" value="false" />
 	     <property name="filters" value="stat,log4j,wall" />
@@ -78,7 +78,7 @@
 	     <property name="testWhileIdle" value="true" />
 	     <property name="testOnBorrow" value="false" />
 	     <property name="testOnReturn" value="false" />
-	     <property name="poolPreparedStatements" value="false" />
+	     <property name="poolPreparedStatements" value="false" /><!-- suggest to set false in mysql -->
 	     <property name="maxOpenPreparedStatements" value="20" />
 	     <property name="defaultAutoCommit" value="false" />
 	     <property name="filters" value="stat,log4j,wall" />
