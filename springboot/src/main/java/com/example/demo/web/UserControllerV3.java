@@ -50,7 +50,7 @@ public class UserControllerV3 {
 	 */
 	@ApiOperation(value="获取用户列表", notes="")
 	@ApiImplicitParam(name = "request", value = "请求对象", required = true, dataType = "CommRequest<Void>")
-	@RequestMapping(value="/getUserList", method=RequestMethod.GET)
+	@RequestMapping(value="/getUserList", method=RequestMethod.POST)
 	public CommResponse<List<User>> getUserList() throws MyException{
 		//List<User> l = new ArrayList<User>(users.values());
 		List<User> l = userService.getUserList();
@@ -65,7 +65,7 @@ public class UserControllerV3 {
 	 */
 	@ApiOperation(value="创建用户", notes="根据User对象创建用户")
     @ApiImplicitParam(name = "request", value = "user对象", required = true, dataType = "CommRequest<User>")
-	@RequestMapping(value="/addUser", method=RequestMethod.GET)
+	@RequestMapping(value="/addUser", method=RequestMethod.POST)
 	public CommResponse<Void> addUser(@RequestBody CommRequest<User> request) throws MyException{
 		User user = request.getData();
 		//users.put(user.getId(), user);
@@ -82,7 +82,7 @@ public class UserControllerV3 {
 	 */
 	@ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
     @ApiImplicitParam(name = "request", value = "用户ID", required = true, dataType = "CommRequest<Long>")
-	@RequestMapping(value="/getUser", method=RequestMethod.GET)
+	@RequestMapping(value="/getUser", method=RequestMethod.POST)
 	public CommResponse<User> getUser(@RequestBody CommRequest<Long> request) throws MyException{
 		Long id = request.getData();
 		User user = null;
@@ -100,7 +100,7 @@ public class UserControllerV3 {
 	 */
 	@ApiOperation(value="更新用户详细信息", notes="根据url的id来指定更新对象，并根据传过来的user信息来更新用户详细信息")
 	@ApiImplicitParam(name = "request", value = "user对象", required = true, dataType = "CommRequest<User>")
-	@RequestMapping(value="/editUser", method=RequestMethod.GET)
+	@RequestMapping(value="/editUser", method=RequestMethod.POST)
 	public CommResponse<Void> editUser(@RequestBody CommRequest<User> request) throws MyException{
 		User user = request.getData();
 		Long id = user.getId();
@@ -124,7 +124,7 @@ public class UserControllerV3 {
 	 */
 	@ApiOperation(value="删除用户", notes="根据url的id来指定删除对象")
 	@ApiImplicitParam(name = "request", value = "用户ID", required = true, dataType = "CommRequest<Long>")
-	@RequestMapping(value="/deleteUser", method=RequestMethod.GET)
+	@RequestMapping(value="/deleteUser", method=RequestMethod.POST)
 	public CommResponse<Void> deleteUser(@RequestBody CommRequest<Long> request) throws MyException {
 		Long id = request.getData();
 		//users.remove(id);

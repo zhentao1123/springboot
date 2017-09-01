@@ -1,5 +1,7 @@
 package com.example.demo.web.response;
 
+import com.alibaba.fastjson.support.spring.annotation.FastJsonView;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

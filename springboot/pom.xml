@@ -40,10 +40,12 @@
 	</dependencyManagement>
 
 	<dependencies>
+	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
+		
 		<!-- web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -54,16 +56,19 @@
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
 		</dependency>
+		
 		<!-- aop -->
 		<dependency>
 	        <groupId>org.springframework.boot</groupId>
 	        <artifactId>spring-boot-starter-aop</artifactId>
 	    </dependency>
+	    
 		<!-- 4 springmvc -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		
 		<!-- swagger -->
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -75,69 +80,72 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.7.0</version>
 		</dependency>
+		
 		<!-- lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+		
 		<!-- test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 		<!-- log -->
 		<dependency>
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-starter-logging</artifactId>
       	</dependency>
+      	
       	<!-- logback -->
       	<dependency>
 	    	<groupId>org.slf4j</groupId>
 	        <artifactId>jcl-over-slf4j</artifactId>
 	    </dependency>
+	    
 	    <!-- jdbc -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
+		
 		<!-- mysql -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- 
-		<dependency>
-		    <groupId>mysql</groupId>
-		    <artifactId>mysql-connector-java</artifactId>
-		    <version>5.1.6</version>
-		</dependency>
-		 -->
+		 
 		<!-- dbcp -->
 		<dependency>
 	        <groupId>commons-dbcp</groupId>
 	        <artifactId>commons-dbcp</artifactId>
 	    </dependency>
+	    
 	    <!-- druid -->
 		<dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
 		</dependency>
+		
 		<!-- redis -->
 		<dependency>
 	        <groupId>org.springframework.integration</groupId>
 	        <artifactId>spring-integration-redis</artifactId>
 	      </dependency>
+	      
 		<!-- server -->
 		<dependency>
 	        <groupId>org.springframework.boot</groupId>
 	        <artifactId>spring-boot-starter-tomcat</artifactId>
 	      </dependency>
 		
-		<!-- jackson
+		<!-- jackson -->
 	    <dependency>
 	        <groupId>com.fasterxml.jackson.core</groupId>
 	        <artifactId>jackson-core</artifactId>
@@ -150,8 +158,8 @@
 	        <groupId>com.fasterxml.jackson.core</groupId>
 	        <artifactId>jackson-annotations</artifactId>
         </dependency>
-         -->
-         <!-- fastjson -->
+        
+        <!-- fastjson -->
         <dependency>
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>fastjson</artifactId>
