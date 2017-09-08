@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.alibaba.fastjson.annotation.JSONField;
@@ -15,6 +16,7 @@ import lombok.Data;
 //@ApiModel(description="用户模型")
 public class User {
 	//@ApiModelProperty(name="ID")
+	@Id
 	private Long id;
 	
 	//@ApiModelProperty(name="姓名")
@@ -37,5 +39,12 @@ public class User {
 
 	public User() {
 		super();
+	}
+	
+	public void init4test(){
+		this.id = 1l;
+		this.name = "Tom";
+		this.age = 20;
+		this.birthday = new Date();
 	}
 }
