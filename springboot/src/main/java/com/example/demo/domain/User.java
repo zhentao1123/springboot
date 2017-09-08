@@ -26,4 +26,16 @@ public class User {
     //@ApiModelProperty(name="生日")
     @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date birthday;
+    
+	public User(Long id, String name, Integer age, Date birthday) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.birthday = birthday;
+	}
+
+	public User() {
+		super();
+	}
 }

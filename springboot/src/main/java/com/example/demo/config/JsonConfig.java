@@ -14,6 +14,10 @@ import com.google.common.collect.Lists;
 @Configuration
 public class JsonConfig {
 
+	/**
+	 * FastJsonConfig
+	 * @return
+	 */
 	@Bean
     public HttpMessageConverters fastJsonHttpMessageConverters() {
        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
