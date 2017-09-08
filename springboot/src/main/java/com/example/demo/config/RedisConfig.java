@@ -1,17 +1,16 @@
 package com.example.demo.config;
 
+import java.text.SimpleDateFormat;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import redis.clients.jedis.JedisPoolConfig;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
@@ -48,35 +47,20 @@ public class RedisConfig {
 	
 	@Bean
     public RedisTemplate<String, Object> redisTemplateObject() throws Exception {
-        RedisTemplate<String, Object> redisTemplateObject = new RedisTemplate<String, Object>();
-        redisTemplateObject.setConnectionFactory(jedisConnectionFactory());
-        setSerializer(redisTemplateObject);
-        redisTemplateObject.afterPropertiesSet();
-        return redisTemplateObject;
-    }
-	
-	private void setSerializer(RedisTemplate<String, Object> template) 
-	{
-		//Object
-        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Object>(Object.class);
-//        ObjectMapper om = new ObjectMapper();
-//        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-//        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-//        jackson2JsonRedisSerializer.setObjectMapper(om);
-        
-        template.setKeySerializer(template.getStringSerializer());
-        template.setHashKeySerializer(template.getHashKeySerializer());
-        template.setValueSerializer(jackson2JsonRedisSerializer);
-        template.setHashValueSerializer(jackson2JsonRedisSerializer);
-        
-        //在使用String的数据结构的时候使用这个来更改序列化方式
-        /*
-        RedisSerializer<String> stringSerializer = new StringRedisSerializer();
-        template.setKeySerializer(stringSerializer);
-        template.setValueSerializer(stringSerializer);
-        template.setHashKeySerializer(stringSerializer);
-        template.setHashValueSerializer(stringSerializer);
-        */
-    }
-	
+        RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
+        template.setConnectionFactory(jedisConnectionFactory());
+        template.afterPropertiesSet();
+        //Set Serializer
+        {
+        	Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Object>(Object.class);
+            ObjectMapper om = new ObjectMapper();
+            om.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+            jackson2JsonRedisSerializer.setObjectMapper(om);
+            template.setValueSerializer(jackson2JsonRedisSerializer);
+            template.setHashValueSerializer(jackson2JsonRedisSerializer);
+            //template.setKeySerializer(template.getStringSerializer());
+            //template.setHashKeySerializer(template.getHashKeySerializer());
+        }
+        return template;
+    }	
 }
