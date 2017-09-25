@@ -28,7 +28,7 @@ public class Swagger2Config {
 			//.genericModelSubstitutes(DeferredResult.class)
             //.useDefaultResponseMessages(false)
             //.forCodeGeneration(true)
-            //.pathMapping("/")
+            //.pathMapping("/springboot")
 			.select()
 			//.apis(RequestHandlerSelectors.basePackage(basePackage))//匹配包
 			//.apis(RequestHandlerSelectors.withClassAnnotßation(Api.class))//匹配类注解

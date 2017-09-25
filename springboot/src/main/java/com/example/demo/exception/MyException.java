@@ -16,4 +16,12 @@ public class MyException extends Exception {
         super(message);
     }
 
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
 }

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.domain.User;
 import com.example.demo.exception.MyException;
 import com.example.demo.service.UserService;
+import com.example.demo.web.request.AddUserRequest;
 import com.example.demo.web.request.CommRequest;
 import com.example.demo.web.response.CommResponse;
 
@@ -68,6 +69,23 @@ public class UserControllerV3 {
 	@RequestMapping(value="/addUser", method=RequestMethod.POST)
 	public CommResponse<Void> addUser(@RequestBody CommRequest<User> request) throws MyException{
 		User user = request.getData();
+		//users.put(user.getId(), user);
+		userService.addUser(user);
+		log.warn(users.toString());
+		return CommResponse.getInstances4Succeed(null);
+	}
+	
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 * @throws MyException
+	 */
+	@ApiOperation(value="创建用户", notes="根据User对象创建用户")
+    @ApiImplicitParam(name = "request", value = "user对象", required = true, dataType = "AddUserRequest")
+	@RequestMapping(value="/addUser1", method=RequestMethod.POST)
+	public CommResponse<Void> addUser1(@RequestBody AddUserRequest request) throws MyException{
+		User user = request.getUser();
 		//users.put(user.getId(), user);
 		userService.addUser(user);
 		log.warn(users.toString());

@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-//@ApiModel(description="响应模型")
+@ApiModel(description="响应模型")
 public class CommResponse<D> {
 	
 	public static final int CODE_SUCCEED = 1;
@@ -15,15 +15,15 @@ public class CommResponse<D> {
 	public static final String COMM_MESSAGE_SUCCEED = "succeed";
 	public static final String COMM_MESSAGE_FAIL = "fail";
 	
-	//@ApiModelProperty(name="code")
+	@ApiModelProperty(name="code")
 	private Integer code;
-	//@ApiModelProperty(name="message")
+	@ApiModelProperty(name="message")
 	private String message;
 	
 	/**
 	 * virtual response data
 	 */
-	//@ApiModelProperty(name="data")
+	@ApiModelProperty(name="data")
 	private D data;
 	
 	public CommResponse(Integer code, String message, D data) {
@@ -43,5 +43,28 @@ public class CommResponse<D> {
 		return instances;
 	}
 
-	
+	public Integer getCode() {
+		return code;
+	}
+
+	public void setCode(Integer code) {
+		this.code = code;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public D getData() {
+		return data;
+	}
+
+	public void setData(D data) {
+		this.data = data;
+	}
+
 }

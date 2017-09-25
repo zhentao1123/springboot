@@ -5,13 +5,22 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-//@ApiModel(description="请求模型")
+@ApiModel(description="请求模型")
 public class CommRequest<D> {
 	//can add some client info here
 	
 	/**
 	 * virtual request data
 	 */
-	//@ApiModelProperty(name="data")
+	@ApiModelProperty(name="data")
 	private D data;
+
+	public D getData() {
+		return data;
+	}
+
+	public void setData(D data) {
+		this.data = data;
+	}
+	
 }
