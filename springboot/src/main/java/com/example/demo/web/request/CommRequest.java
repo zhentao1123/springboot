@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 @ApiModel(description="请求模型")
 public class CommRequest<D> {
-	//can add some client info here
 	
 	/**
 	 * virtual request data

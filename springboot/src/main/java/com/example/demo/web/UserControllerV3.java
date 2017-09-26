@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.domain.User;
 import com.example.demo.exception.MyException;
 import com.example.demo.service.UserService;
+<<<<<<< HEAD
 import com.example.demo.web.request.AddUserRequest;
 import com.example.demo.web.request.CommRequest;
 import com.example.demo.web.response.CommResponse;
@@ -86,6 +87,52 @@ public class UserControllerV3 {
 	@RequestMapping(value="/addUser1", method=RequestMethod.POST)
 	public CommResponse<Void> addUser1(@RequestBody AddUserRequest request) throws MyException{
 		User user = request.getUser();
+=======
+import com.example.demo.web.request.CommRequest;
+import com.example.demo.web.response.CommResponse;
+
+/**
+ * do all process with get method
+ * @author zhangzhentao
+ *
+ */
+@RestController
+@RequestMapping("/v3/users")
+@Api(hidden=false, tags="User接口")
+public class UserControllerV3 {
+	
+	static final Log log = LogFactory.getLog(UserControllerV2.class);
+	static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
+
+	@Autowired
+	UserService userService;
+	
+	/**
+	 * 
+	 * @return
+	 * @throws MyException
+	 */
+	@ApiOperation(value="获取用户列表", notes="")
+	@ApiImplicitParam(name = "request", value = "请求对象", required = true, dataType = "CommRequest<Void>")
+	@RequestMapping(value="/getUserList", method=RequestMethod.POST)
+	public CommResponse<List<User>> getUserList() throws MyException{
+		//List<User> l = new ArrayList<User>(users.values());
+		List<User> l = userService.getUserList();
+		return CommResponse.getInstances4Succeed(l);
+	}
+	
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 * @throws MyException
+	 */
+	@ApiOperation(value="创建用户", notes="根据User对象创建用户")
+    @ApiImplicitParam(name = "request", value = "user对象", required = true, dataType = "CommRequest<User>")
+	@RequestMapping(value="/addUser", method=RequestMethod.POST)
+	public CommResponse<Void> addUser(@RequestBody CommRequest<User> request) throws MyException{
+		User user = request.getData();
+>>>>>>> branch 'master' of https://github.com/zhentao1123/springboot.git
 		//users.put(user.getId(), user);
 		userService.addUser(user);
 		log.warn(users.toString());

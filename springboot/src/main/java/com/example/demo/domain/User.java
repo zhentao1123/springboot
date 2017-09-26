@@ -15,6 +15,7 @@ import lombok.Data;
 @Data
 @ApiModel(description="用户模型")
 public class User {
+
 	@ApiModelProperty(name="ID")
 	@Id
 	private Long id;
@@ -25,6 +26,7 @@ public class User {
 	@ApiModelProperty(name="年龄")
     private Integer age;
     
+
     @ApiModelProperty(name="生日")
     @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date birthday;
@@ -79,5 +81,4 @@ public class User {
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
-	
 }
