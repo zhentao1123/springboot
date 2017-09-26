@@ -2,7 +2,7 @@ package com.example.demo.web.request;
 
 import com.example.demo.domain.User;
 
-public class AddUserRequest extends CommRequest<Object>{
+public class AddUserRequest{
 	User user;
 
 	public User getUser() {
