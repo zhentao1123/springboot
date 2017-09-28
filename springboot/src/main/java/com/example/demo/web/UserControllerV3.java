@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.User;
-import com.example.demo.exception.MyException;
+import com.example.demo.exception.ServiceException;
 import com.example.demo.service.UserService;
 import com.example.demo.web.request.AddUserRequest;
 import com.example.demo.web.request.CommRequest;
@@ -47,12 +47,12 @@ public class UserControllerV3 {
 	/**
 	 * 
 	 * @return
-	 * @throws MyException
+	 * @throws ServiceException
 	 */
 	@ApiOperation(value="获取用户列表", notes="")
 	@ApiImplicitParam(name = "request", value = "请求对象", required = true, dataType = "CommRequest<Void>")
 	@RequestMapping(value="/getUserList", method=RequestMethod.POST)
-	public CommResponse<List<User>> getUserList() throws MyException{
+	public CommResponse<List<User>> getUserList() throws ServiceException{
 		//List<User> l = new ArrayList<User>(users.values());
 		List<User> l = userService.getUserList();
 		return CommResponse.getInstances4Succeed(l);
@@ -62,12 +62,12 @@ public class UserControllerV3 {
 	 * 
 	 * @param request
 	 * @return
-	 * @throws MyException
+	 * @throws ServiceException
 	 */
 	@ApiOperation(value="创建用户", notes="根据User对象创建用户")
     @ApiImplicitParam(name = "request", value = "user对象", required = true, dataType = "CommRequest<User>")
 	@RequestMapping(value="/addUser", method=RequestMethod.POST)
-	public CommResponse<Void> addUser(@RequestBody CommRequest<User> request) throws MyException{
+	public CommResponse<Void> addUser(@RequestBody CommRequest<User> request) throws ServiceException{
 		User user = request.getData();
 		//users.put(user.getId(), user);
 		userService.addUser(user);
@@ -79,12 +79,12 @@ public class UserControllerV3 {
 	 * 
 	 * @param request
 	 * @return
-	 * @throws MyException
+	 * @throws ServiceException
 	 */
 	@ApiOperation(value="创建用户", notes="根据User对象创建用户")
     @ApiImplicitParam(name = "request", value = "user对象", required = true, dataType = "AddUserRequest")
 	@RequestMapping(value="/addUser1", method=RequestMethod.POST)
-	public CommResponse<Void> addUser1(@RequestBody AddUserRequest request) throws MyException{
+	public CommResponse<Void> addUser1(@RequestBody AddUserRequest request) throws ServiceException{
 		User user = request.getUser();
 		userService.addUser(user);
 		log.warn(users.toString());
@@ -95,12 +95,12 @@ public class UserControllerV3 {
 	 * 
 	 * @param request
 	 * @return
-	 * @throws MyException
+	 * @throws ServiceException
 	 */
 	@ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
     @ApiImplicitParam(name = "request", value = "用户ID", required = true, dataType = "CommRequest<Long>")
 	@RequestMapping(value="/getUser", method=RequestMethod.POST)
-	public CommResponse<User> getUser(@RequestBody CommRequest<Long> request) throws MyException{
+	public CommResponse<User> getUser(@RequestBody CommRequest<Long> request) throws ServiceException{
 		Long id = request.getData();
 		User user = null;
 		//user = users.get(id);
@@ -113,12 +113,12 @@ public class UserControllerV3 {
 	 * @param id
 	 * @param user
 	 * @return
-	 * @throws MyException
+	 * @throws ServiceException
 	 */
 	@ApiOperation(value="更新用户详细信息", notes="根据url的id来指定更新对象，并根据传过来的user信息来更新用户详细信息")
 	@ApiImplicitParam(name = "request", value = "user对象", required = true, dataType = "CommRequest<User>")
 	@RequestMapping(value="/editUser", method=RequestMethod.POST)
-	public CommResponse<Void> editUser(@RequestBody CommRequest<User> request) throws MyException{
+	public CommResponse<Void> editUser(@RequestBody CommRequest<User> request) throws ServiceException{
 		User user = request.getData();
 		Long id = user.getId();
 		//User u = users.get(id);
@@ -137,12 +137,12 @@ public class UserControllerV3 {
 	 * 
 	 * @param id
 	 * @return
-	 * @throws MyException
+	 * @throws ServiceException
 	 */
 	@ApiOperation(value="删除用户", notes="根据url的id来指定删除对象")
 	@ApiImplicitParam(name = "request", value = "用户ID", required = true, dataType = "CommRequest<Long>")
 	@RequestMapping(value="/deleteUser", method=RequestMethod.POST)
-	public CommResponse<Void> deleteUser(@RequestBody CommRequest<Long> request) throws MyException {
+	public CommResponse<Void> deleteUser(@RequestBody CommRequest<Long> request) throws ServiceException {
 		Long id = request.getData();
 		//users.remove(id);
 		userService.removeUser(id);

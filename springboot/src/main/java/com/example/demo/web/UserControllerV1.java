@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.User;
-import com.example.demo.exception.MyException;
+import com.example.demo.exception.ServiceException;
 import com.example.demo.service.UserService;
 
 /**
@@ -47,11 +47,11 @@ public class UserControllerV1 {
 	 * 处理"/users/"的GET请求，用来获取用户列表
 	 * 还可以通过@RequestParam从页面中传递参数来进行查询条件或者翻页信息的传递
 	 * @return
-	 * @throws MyException 
+	 * @throws ServiceException 
 	 */
 	@ApiOperation(value="获取用户列表", notes="")
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public List<User> getUserList() throws MyException{
+	public List<User> getUserList() throws ServiceException{
 		List<User> l = new ArrayList<User>(users.values());
 		//List<User> l = userService.getUserList();
 		return l;
@@ -66,7 +66,7 @@ public class UserControllerV1 {
 	@ApiOperation(value="创建用户", notes="根据User对象创建用户")
     @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
 	@RequestMapping(value="/", method=RequestMethod.POST)
-	public String postUser(@RequestBody User user) throws MyException{
+	public String postUser(@RequestBody User user) throws ServiceException{
 		users.put(user.getId(), user);
 		//userService.addUser(user);
 		log.warn(users.toString());
@@ -82,7 +82,7 @@ public class UserControllerV1 {
 	@ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public User getUser(@PathVariable Long id) throws MyException{
+	public User getUser(@PathVariable Long id) throws ServiceException{
 		return users.get(id);
 		//return userService.getUser(id);
 	}
@@ -99,7 +99,7 @@ public class UserControllerV1 {
             @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
     })
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public String putUser(@PathVariable Long id, @RequestBody User user) throws MyException{
+	public String putUser(@PathVariable Long id, @RequestBody User user) throws ServiceException{
 		User u = users.get(id);
 		u.setAge(user.getAge());
 		u.setName(user.getName());
@@ -118,12 +118,12 @@ public class UserControllerV1 {
 	 * 处理"/users/{id}"的DELETE请求，用来删除User
 	 * @param id
 	 * @return
-	 * @throws MyException 
+	 * @throws ServiceException 
 	 */
 	@ApiOperation(value="删除用户", notes="根据url的id来指定删除对象")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public String deleteUser(@PathVariable Long id) throws MyException {
+	public String deleteUser(@PathVariable Long id) throws ServiceException {
 		users.remove(id);
 		//userService.removeUser(id);
 		return SUCCESS;

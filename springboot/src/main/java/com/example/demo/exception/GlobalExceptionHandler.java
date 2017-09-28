@@ -35,9 +35,9 @@ public class GlobalExceptionHandler {
      * @return
      * @throws Exception
      */
-    @ExceptionHandler(value = MyException.class)
+    @ExceptionHandler(value = ServiceException.class)
     @ResponseBody
-    public ErrorInfo<String> jsonErrorHandler(HttpServletRequest req, MyException e) throws Exception {
+    public ErrorInfo<String> jsonErrorHandler(HttpServletRequest req, ServiceException e) throws Exception {
         ErrorInfo<String> r = new ErrorInfo<>();
         r.setMessage(e.getMessage());
         r.setCode(ErrorInfo.ERROR);

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.exception.MyException;
+import com.example.demo.exception.ServiceException;
 
 @Controller
 @RequestMapping("/error")
@@ -16,8 +16,8 @@ public class ErrorController {
     }
 
     @RequestMapping("/json")
-    public String json() throws MyException {
-        throw new MyException("发生错误2");
+    public String json() throws ServiceException {
+        throw new ServiceException("发生错误2");
     }
 
     @RequestMapping("/")

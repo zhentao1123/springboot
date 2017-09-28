@@ -8,11 +8,11 @@ import lombok.Data;
  */
 @SuppressWarnings("serial")
 @Data
-public class MyException extends Exception {
+public class ServiceException extends Exception {
 
 	private String info;
 	
-    public MyException(String message) {
+    public ServiceException(String message) {
         super(message);
     }
 
